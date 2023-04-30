@@ -22,8 +22,8 @@ list_of_unique_product
 
 def get_product_wise_data(row_list, list_of_unique_product):
     product_wise_data = {}
-    for p in list_of_unique_product:
-        product_wise_data[p] = list()
+    for product in list_of_unique_product:
+        product_wise_data[product] = list()
     for id, row in enumerate(row_list):
         product_wise_data[row[1]].append(row)
     return product_wise_data
@@ -58,7 +58,7 @@ def generate_buy_sell_queue(all_trades_for_product):
     return buy_queue, sell_queue
 
 
-def list_of_trade_bw_parties(p, buy_queue, sell_queue, trade_quantity, trade_price, w, transaction_log):
+def list_of_trade_bw_parties(product, buy_queue, sell_queue, trade_quantity, trade_price, w, transaction_log):
     while trade_quantity > 0:
         current_buyer, current_seller = buy_queue[0], sell_queue[0]
         transaction_quant = min(current_buyer[3], current_seller[3])
@@ -88,7 +88,7 @@ def list_of_trade_bw_parties(p, buy_queue, sell_queue, trade_quantity, trade_pri
             [
                 current_trade["seller"],
                 current_trade["buyer"],
-                p,
+                product,
                 current_trade["quantity"],
                 current_trade["rate"],
                 current_trade["sellers_profit"],
@@ -114,8 +114,8 @@ with open("mid_results.csv", "w") as f:
         ]
     )
     product_wise_data = get_product_wise_data(row_list, list_of_unique_product)
-    for p, v in product_wise_data.items():
-        print(p)
+    for product, v in product_wise_data.items():
+        print(product)
 
         trade_quantity = get_trade_quantity(v)
         print("total buy/sell quantity", trade_quantity)
@@ -127,7 +127,7 @@ with open("mid_results.csv", "w") as f:
         buy_queue, sell_queue = generate_buy_sell_queue(v)
 
         transaction_log = list_of_trade_bw_parties(
-            p, buy_queue, sell_queue, trade_quantity, trade_price, w, transaction_log
+            product, buy_queue, sell_queue, trade_quantity, trade_price, w, transaction_log
         )
-        print("---------all trades for product {} executed--------------------".format(p))
+        print("---------all trades for product {} executed--------------------".format(product))
     print("all transactions completed and logged into mid_results.csv")
