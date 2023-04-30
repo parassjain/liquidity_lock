@@ -1,0 +1,11 @@
+seller,buyer,product,quantity,rate,sellers_profit,buyers_profit
+D,A,Orange,12,10.25,1188,1224
+A,B,Cherry,9,8.06,891,891
+A,D,Cherry,1,8.06,99,97
+C,A,Banana,1,6.39,104,104
+C,B,Banana,2,6.39,208,202
+C,E,Banana,8,6.39,832,808
+D,E,Banana,1,6.39,100,101
+A,C,Apple,16,15.73,1536,1616
+B,C,Apple,4,15.73,408,404
+B,D,Apple,7,15.73,714,672
